@@ -41,13 +41,13 @@ h5py >= 3.0
 
 ```bash
 # Clone or download the script
-wget
+wget https://github.com/SarangVehale/EDfor_Manybody/blob/main/ed/exact_diagonalization.py
 
 # Install dependencies
 pip install numpy scipy numba h5py
 
 # Verify installation
-python exact_diagonalization_production.py --validate
+python exact_diagonalization.py --validate
 ```
 
 ### Conda Environment (Recommended)
@@ -65,7 +65,7 @@ conda install numpy scipy numba h5py -c conda-forge
 Always run this first to verify correctness:
 
 ```bash
-python exact_diagonalization_production.py --validate
+python exact_diagonalization.py --validate
 ```
 
 Expected output:
@@ -91,7 +91,7 @@ SUMMARY: 3/3 tests passed
 
 ```bash
 # 12-site chain, Sz=0 sector, open boundary conditions
-python exact_diagonalization_production.py \
+python exact_diagonalization.py \
     --model heisenberg \
     --N 12 \
     --Sz 0 \
@@ -105,7 +105,7 @@ python exact_diagonalization_production.py \
 
 ```bash
 # Critical point (h=J), periodic boundary conditions
-python exact_diagonalization_production.py \
+python exact_diagonalization.py \
     --model tfim \
     --N 14 \
     --h 1.0 \
@@ -119,7 +119,7 @@ python exact_diagonalization_production.py \
 
 ```bash
 # 8 sites, half-filling, strong coupling
-python exact_diagonalization_production.py \
+python exact_diagonalization.py \
     --model hubbard \
     --N 8 \
     --t 1.0 \
@@ -136,7 +136,7 @@ python exact_diagonalization_production.py \
 
 ```bash
 # Heisenberg with k=0 momentum sector (ground state usually here)
-python exact_diagonalization_production.py \
+python exact_diagonalization.py \
     --model heisenberg \
     --N 16 \
     --boundary periodic \
@@ -149,7 +149,7 @@ python exact_diagonalization_production.py \
 
 ```bash
 # Custom Lanczos with tight convergence
-python exact_diagonalization_production.py \
+python exact_diagonalization.py \
     --model heisenberg \
     --N 14 \
     --method lanczos \
@@ -265,7 +265,7 @@ with open('ed_production_output/heisenberg_N12_summary.json', 'r') as f:
 ```bash
 # Scan XXZ anisotropy Δ = Jz/J
 for Jz in 0.5 1.0 1.5 2.0; do
-    python exact_diagonalization_production.py \
+    python exact_diagonalization.py \
         --model heisenberg \
         --N 12 \
         --J 1.0 \
@@ -281,7 +281,7 @@ done
 ```bash
 # Scan transverse field through critical point
 for h in 0.2 0.5 0.8 1.0 1.2 1.5 2.0; do
-    python exact_diagonalization_production.py \
+    python exact_diagonalization.py \
         --model tfim \
         --N 16 \
         --boundary periodic \
@@ -296,7 +296,7 @@ done
 ```bash
 # Scan interaction strength
 for U in 0.0 2.0 4.0 6.0 8.0 10.0; do
-    python exact_diagonalization_production.py \
+    python exact_diagonalization.py \
         --model hubbard \
         --N 8 \
         --t 1.0 \
@@ -333,7 +333,7 @@ python ... --N 14 --Sz 0 --use_translation --momentum 0 --boundary periodic
 
 ```bash
 # Use GNU parallel for parameter sweeps
-parallel -j 4 python exact_diagonalization_production.py \
+parallel -j 4 python exact_diagonalization.py \
     --model heisenberg --N 12 --h {} --output h_{} \
     ::: 0.5 1.0 1.5 2.0
 ```
@@ -410,11 +410,11 @@ If you use this code in your research, please cite:
 
 ```bibtex
 @software{ed_production,
-  title = {Production-Grade Exact Diagonalization Engine},
-  author = {Your Name},
+  title = {Exact Diagonalization Engine},
+  author = {Sarang Vehale},
   year = {2025},
-  url = {https://github.com/yourusername/ed_production},
-  note = {Research-grade implementation with symmetry sectors and validation}
+  url = {https://github.com/SarangVehale/EDfor_Manybody/},
+  note = {Exact Diagonalization implementation with symmetry sectors and validation}
 }
 
 ---
@@ -449,7 +449,7 @@ MIT License - see LICENSE file for details.
 
 - **Documentation**: This README + inline docstrings
 - **Issues**: [GitHub Issues](https://github.com/SarangVehale/EDfor_Manybody/issues)
-- **Email**: your.email@institution.edu
+- **Email**: sarangvehale2@gmail.com
 - **Discussions**: [GitHub Discussions](https://github.com/SarangVehale/EDfor_Manybody/discussions)
 
 ## Acknowledgments
@@ -462,5 +462,6 @@ MIT License - see LICENSE file for details.
 ---
 
 **Version**: 1.0.0  
-**Last Updated**: October 2025  
-**Status**: Production-ready for peer-reviewed publications
+**Last Updated**: October 2025
+
+<!-- **Status**: Production-ready for peer-reviewed publications -->
