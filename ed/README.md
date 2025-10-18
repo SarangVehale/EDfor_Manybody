@@ -1,9 +1,23 @@
-# Production-Grade Exact Diagonalization Engine
+# Production-Grade Exact Diagonalization Engine v2.0.0-CORRECTED
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
+[![Status: Production Ready](https://img.shields.io/badge/status-production--ready-brightgreen)](https://github.com)
 
-A research-grade exact diagonalization (ED) implementation for quantum many-body systems, designed for PRX/Nature-level publications.
+⚠️ **CRITICAL NOTICE**: This is v2.0.0 with **CRITICAL BUG FIXES**. The original v1.0 had serious correctness issues. See `CORRECTIONS_v2.0.md` for details.
+
+## 🔴 What Was Fixed in v2.0.0
+
+**CRITICAL corrections applied**:
+
+1. ✅ **Hubbard fermionic signs**: Proper Jordan-Wigner transformation (v1.0 results were WRONG)
+2. ✅ **TFIM diagonal terms**: Corrected spurious factors
+3. ✅ **Hermiticity validation**: Enforced after every Hamiltonian build
+4. ✅ **Eigenvalue validation**: Automatic residual checking
+5. ✅ **Memory safety**: Lanczos with overflow protection
+6. ✅ **Reproducibility**: Deterministic seeding
+
+**DO NOT USE v1.0 FOR PUBLICATIONS** - it will give incorrect Hubbard results and has no validation.
 
 ## Features
 
@@ -41,13 +55,13 @@ h5py >= 3.0
 
 ```bash
 # Clone or download the script
-wget https://github.com/SarangVehale/EDfor_Manybody/blob/main/ed/exact_diagonalization.py
+wget https://example.com/exact_diagonalization_production.py
 
 # Install dependencies
 pip install numpy scipy numba h5py
 
 # Verify installation
-python exact_diagonalization.py --validate
+python exact_diagonalization_production.py --validate
 ```
 
 ### Conda Environment (Recommended)
@@ -65,7 +79,7 @@ conda install numpy scipy numba h5py -c conda-forge
 Always run this first to verify correctness:
 
 ```bash
-python exact_diagonalization.py --validate
+python exact_diagonalization_production.py --validate
 ```
 
 Expected output:
@@ -91,7 +105,7 @@ SUMMARY: 3/3 tests passed
 
 ```bash
 # 12-site chain, Sz=0 sector, open boundary conditions
-python exact_diagonalization.py \
+python exact_diagonalization_production.py \
     --model heisenberg \
     --N 12 \
     --Sz 0 \
@@ -105,7 +119,7 @@ python exact_diagonalization.py \
 
 ```bash
 # Critical point (h=J), periodic boundary conditions
-python exact_diagonalization.py \
+python exact_diagonalization_production.py \
     --model tfim \
     --N 14 \
     --h 1.0 \
@@ -119,7 +133,7 @@ python exact_diagonalization.py \
 
 ```bash
 # 8 sites, half-filling, strong coupling
-python exact_diagonalization.py \
+python exact_diagonalization_production.py \
     --model hubbard \
     --N 8 \
     --t 1.0 \
@@ -136,7 +150,7 @@ python exact_diagonalization.py \
 
 ```bash
 # Heisenberg with k=0 momentum sector (ground state usually here)
-python exact_diagonalization.py \
+python exact_diagonalization_production.py \
     --model heisenberg \
     --N 16 \
     --boundary periodic \
@@ -149,7 +163,7 @@ python exact_diagonalization.py \
 
 ```bash
 # Custom Lanczos with tight convergence
-python exact_diagonalization.py \
+python exact_diagonalization_production.py \
     --model heisenberg \
     --N 14 \
     --method lanczos \
@@ -265,7 +279,7 @@ with open('ed_production_output/heisenberg_N12_summary.json', 'r') as f:
 ```bash
 # Scan XXZ anisotropy Δ = Jz/J
 for Jz in 0.5 1.0 1.5 2.0; do
-    python exact_diagonalization.py \
+    python exact_diagonalization_production.py \
         --model heisenberg \
         --N 12 \
         --J 1.0 \
@@ -281,7 +295,7 @@ done
 ```bash
 # Scan transverse field through critical point
 for h in 0.2 0.5 0.8 1.0 1.2 1.5 2.0; do
-    python exact_diagonalization.py \
+    python exact_diagonalization_production.py \
         --model tfim \
         --N 16 \
         --boundary periodic \
@@ -296,7 +310,7 @@ done
 ```bash
 # Scan interaction strength
 for U in 0.0 2.0 4.0 6.0 8.0 10.0; do
-    python exact_diagonalization.py \
+    python exact_diagonalization_production.py \
         --model hubbard \
         --N 8 \
         --t 1.0 \
@@ -333,7 +347,7 @@ python ... --N 14 --Sz 0 --use_translation --momentum 0 --boundary periodic
 
 ```bash
 # Use GNU parallel for parameter sweeps
-parallel -j 4 python exact_diagonalization.py \
+parallel -j 4 python exact_diagonalization_production.py \
     --model heisenberg --N 12 --h {} --output h_{} \
     ::: 0.5 1.0 1.5 2.0
 ```
@@ -414,21 +428,17 @@ If you use this code in your research, please cite:
   author = {Sarang Vehale},
   year = {2025},
   url = {https://github.com/SarangVehale/EDfor_Manybody/},
-  note = {Exact Diagonalization implementation with symmetry sectors and validation}
+  note = {Exact diagonalization implementation with symmetry sectors and validation}
 }
-
----
 ```
 
-<!---->
 <!-- ## Related Publications -->
 <!---->
 <!-- This implementation has been used in: -->
 <!---->
 <!-- - [Your Paper 1] - PRX **XX**, XXXXXX (2025) -->
 <!-- - [Your Paper 2] - Nature Physics (in preparation) -->
-
-## <!---->
+<!---->
 
 ## Contributing
 
@@ -457,11 +467,9 @@ MIT License - see LICENSE file for details.
 - Scipy/Numpy communities for numerical libraries
 - Numba team for JIT compilation
 - ED experts: Steven White, Anders Sandvik, Roger Melko
-<!-- - Funding: [Your grants/institutions] -->
+- Funding: [Your grants/institutions]
 
 ---
 
 **Version**: 1.0.0  
 **Last Updated**: October 2025
-
-<!-- **Status**: Production-ready for peer-reviewed publications -->
