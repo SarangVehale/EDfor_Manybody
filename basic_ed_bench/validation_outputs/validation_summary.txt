@@ -1,0 +1,5 @@
+Validation run summary
+Model heisenberg: Ns=[8, 10, 12, 14, 16, 18]
+  Extrapolated E_inf = -0.443036082243
+Model tfim: Ns=[8, 10, 12, 14, 16, 18]
+  Extrapolated E_inf = -1.273204173413
